@@ -1,7 +1,7 @@
 FROM python:3.9-alpine
 
 RUN apk update
-RUN apk add gcc musl-dev make mysql nodejs npm
+RUN apk add gcc musl-dev make mysql nodejs npm mysql-dev
 
 # npm packages
 RUN npm install -g n
@@ -17,7 +17,7 @@ RUN pip install --upgrade pip
 RUN pip install black mypy isort flake8
 
 # necessary packages
-RUN pip install PyJWT pytz sqlparse
+RUN pip install PyJWT pytz sqlparse mysqlclient
 
 # django packages
 RUN pip install django \
@@ -25,3 +25,6 @@ RUN pip install django \
     django-filter \
     djangorestframework \
     djangorestframework-jwt
+
+# linebot
+RUN pip install line-bot-sdk==1.20.0
