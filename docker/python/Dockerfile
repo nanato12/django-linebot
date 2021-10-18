@@ -28,3 +28,6 @@ RUN pip install django \
 
 # linebot
 RUN pip install line-bot-sdk==1.20.0
+
+ENV LINE_CHANNEL_SECRET="YOUR_CHANNEL_SECRET"
+ENV LINE_CHANNEL_ACCESS_TOKEN="YOUR_CHANNEL_ACCESS_TOKEN"
