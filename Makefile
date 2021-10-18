@@ -17,3 +17,6 @@ exec:
 
 run:
 	docker-compose up --build
+
+ngrok:
+	ngrok http 8000 --region=ap
