@@ -12,5 +12,8 @@ isort:
 mypy:
 	mypy .
 
+exec:
+	docker exec -it web sh
+
 run:
-	python main.py
+	docker-compose up --build
