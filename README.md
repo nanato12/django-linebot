@@ -57,6 +57,38 @@ make: *** [Makefile:13: mypy] Error 1
 /code # touch apps/bot/urls.py
 ```
 
+その後、ルートの `apps/urls.py` にも追加
+
+6. app_nameを設定しないといけないんだって
+
+`apps/bot/apps.py`
+
+```python
+class BotConfig(AppConfig):
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "apps.bot"  # 変更
+
+```
+
+`apps/settings.py`
+
+```python
+INSTALLED_APPS = [
+    ...
+    "apps.bot",  # 追加
+]
+```
+
+7. ALLOWED_HOSTSの設定
+
+ngrokで起動したら怒られたから設定
+
+ローカル環境なので、一旦全ホスト許可
+
+```python
+ALLOWED_HOSTS = ["*"]
+```
+
 ## GitHub Actions
 
 - **pychecker**
