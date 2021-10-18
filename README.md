@@ -7,6 +7,10 @@ DjangoでLINEBotを作りますよ〜
 - Python 3.9.7
 - Django 3.2.8
 
+## パッケージ
+
+- line-bot-sdk 1.20.0
+
 ## セットアップ
 
 ```sh
@@ -39,7 +43,6 @@ make: *** [Makefile:13: mypy] Error 1
 ```
 
 自動生成されたファイルをリンターに沿って修正
-
 
 ## GitHub Actions
 
