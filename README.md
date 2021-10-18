@@ -1,6 +1,17 @@
-# python template repository
+# django-linebot
 
-repository description here
+DjangoでLINEBotを作りますよ〜
+
+## 　環境
+
+- Python 3.9.7
+- Django 3.2.8
+
+## セットアップ
+
+```sh
+$ make run
+```
 
 ## GitHub Actions
 
