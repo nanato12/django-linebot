@@ -1,0 +1,62 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ./docker/python
+    container_name: web
+    environment:
+      <<: &db_info
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_USER: user
+        MYSQL_PASSWORD: password
+        MYSQL_DATABASE: django-linebot
+        TZ: Asia/Tokyo
+      DB_HOT: mysql
+      REDIS_HOST: redis
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - .:/code
+    working_dir: /code
+    ports:
+      - 8000:8000
+    depends_on:
+      - mysql
+    tty: true
+
+
+  mysql:
+    # M1 Mac ARM mysql:5.7.23
+    image: mysql@sha256:860f4bcc18607de9f40a7453c7dc160313ecc3a5a46be3b060569b6216d348f6
+    hostname: mysql
+    container_name: db-mysql
+    restart: always
+    environment:
+      <<: *db_info
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/mysql/sql:/docker-entrypoint-initdb.d
+
+  phpmyadmin:
+    hostname: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    container_name: db-phpmyadmin
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOSTS: mysql
+      PMA_USER: user
+      PMA_PASSWORD: password
+    links:
+      - mysql
+    ports:
+      - 8080:80
+    volumes:
+      - ./docker/phpmyadmin/sessions:/sessions
+
+  redis:
+    image: redis:6.2.6-alpine
+    container_name: redis
+    ports:
+      - 6379:6379
