@@ -44,6 +44,19 @@ make: *** [Makefile:13: mypy] Error 1
 
 自動生成されたファイルをリンターに沿って修正
 
+4. linebotのappを作成する
+
+```plain
+/code # mkdir apps/bot
+/code # python manage.py startapp bot ./apps/bot
+```
+
+5. apps/bot/urls.py の作成
+
+```plain
+/code # touch apps/bot/urls.py
+```
+
 ## GitHub Actions
 
 - **pychecker**
