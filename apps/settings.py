@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 from typing import List
 
@@ -78,8 +79,12 @@ WSGI_APPLICATION = "apps.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": os.environ.get("MYSQL_DATABASE", "django-linebot"),
+        "USER": os.environ.get("MYSQL_USER", "user"),
+        "PASSWORD": os.environ.get("MYSQL_PASSWORD", "password"),
+        "HOST": os.environ.get("MYSQL_HOT", "mysql"),
+        "PORT": "3306",
     }
 }
 
